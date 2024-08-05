@@ -93,6 +93,8 @@ Contributions are welcome! If you'd like to contribute, please follow these step
 
 ## License
 This project is licensed under the BSD 3-Clause License. 
+This code is protected under an "All Rights Reserved" license. You must obtain explicit permission from the copyright holder before using, distributing, or modifying this work.
+
 
 ## Contact
 For any queries or suggestions, feel free to reach out:
