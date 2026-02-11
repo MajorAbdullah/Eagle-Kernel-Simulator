@@ -1,102 +1,115 @@
-# Process Manager and Memory Management Simulation
+# Eagle Kernel Simulator
+### An interactive OS kernel simulator for process and memory management
 
-## Overview
-The Process Manager and Memory Management Simulation is a C++ application designed to simulate various aspects of process management and memory management in an operating system. This system allows you to create, manage, and schedule processes, as well as handle memory management operations like paging and Least Recently Used (LRU) page replacement.
+Eagle Kernel Simulator is a C++ console application that simulates core operating system functionalities including process lifecycle management, CPU scheduling algorithms, and memory management with paging and page replacement. It provides a menu-driven interface for hands-on exploration of OS concepts.
+
+---
 
 ## Features
-1. **Process Management**: Create, destroy, suspend, resume, block, wake up, and dispatch processes.
-2. **Scheduling Algorithms**:
-    - First-Come-First-Serve (FCFS)
-    - Priority Scheduling
-    - Shortest Job First (SJF)
-    - Round-Robin (RR)
-    - Multilevel Queue Scheduling
-3. **Memory Management**:
-    - Set page size for processes
-    - Calculate the number of pages required
-    - Perform paging for processes
-    - Simulate Least Recently Used (LRU) page replacement
-4. **Process Communication**: Simulate communication between processes.
-5. **Logging**: Actions performed during the simulation are logged to a file (`process_log.txt`) for tracking and debugging purposes.
 
-## Requirements
-- C++ Compiler (e.g., GCC, MSVC)
-- CMake (for building the project)
-- Google Test (for unit testing)
+- **Process Lifecycle Management** -- Create, destroy, suspend, resume, block, wake up, and dispatch processes through ready, running, and blocked queues
+- **Multiple Scheduling Algorithms**
+  - First-Come-First-Serve (FCFS)
+  - Priority Scheduling
+  - Shortest Job First (SJF)
+  - Round-Robin (RR) with configurable time quantum
+  - Multilevel Queue Scheduling (splits processes by priority threshold into separate queues)
+- **Memory Management**
+  - Configurable page size per process
+  - Page count and frame calculation
+  - Paging simulation with frame allocation
+  - Least Recently Used (LRU) page replacement algorithm
+- **Inter-Process Communication** -- Simulated message passing between processes
+- **Dynamic Priority Management** -- Change process priorities at runtime
+- **Automatic Process Generation** -- Bulk-create processes with randomized arrival times, burst times, and priorities
+- **Action Logging** -- All operations are timestamped and logged to `process_log.txt` for auditing and debugging
+- **Input Validation** -- Robust menu-driven interface with validated user input
 
-## How to Run
-1. **Clone the repository**:
-    ```bash
-    git clone https://github.com/yourusername/process-manager-simulation.git
-    ```
-2. **Navigate to the project directory**:
-    ```bash
-    cd process-manager-simulation
-    ```
-3. **Build the project**:
-    ```bash
-    mkdir build
-    cd build
-    cmake ..
-    make
-    ```
-4. **Run the executable**:
-    ```bash
-    ./process_manager
-    ```
+---
+
+## Tech Stack
+
+![C++](https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![GCC](https://img.shields.io/badge/GCC-A42E2B?style=for-the-badge&logo=gnu&logoColor=white)
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- A C++ compiler supporting C++11 or later (GCC, Clang, or MSVC)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/MajorAbdullah/Eagle-Kernel-Simulator.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd Eagle-Kernel-Simulator
+   ```
+3. Compile the source code:
+   ```bash
+   g++ -o eagle_os Eagle_OS.cpp -std=c++11
+   ```
+4. Run the executable:
+   ```bash
+   ./eagle_os
+   ```
+
+---
 
 ## Usage
-Upon running the program, you will be presented with a menu to choose from various options:
 
-### Main Menu:
-1. **Process Management**: Manage processes using various operations and scheduling algorithms.
-2. **Memory Management**: Perform memory management operations like paging and LRU.
-3. **Automatically Add Processes**: Automatically create processes with random values.
-4. **Exit**: Exit the program.
+The application presents a hierarchical menu system:
 
-### Process Management Menu:
-- **Create a Process**: Manually create processes by specifying the arrival time, burst time, and priority.
-- **Destroy a Process**: Remove a process from the system.
-- **Suspend a Process**: Suspend a running process and move it back to the ready queue.
-- **Resume a Process**: Resume a suspended process and move it to the running state.
-- **Block a Process**: Block a running process and move it to the blocked queue.
-- **Wake Up a Process**: Wake up a blocked process and move it to the ready queue.
-- **Dispatch a Process**: Move a ready process to the running state.
-- **Change Process Priority**: Change the priority of a process.
-- **Process Communication**: Simulate communication between processes.
-- **Scheduling Algorithms**: Choose and execute different scheduling algorithms.
+### Main Menu
 
-### Memory Management Menu:
-- **Set Page Size**: Set the page size for a specific process.
-- **Calculate Pages**: Calculate the number of pages required based on memory allocation and process size.
-- **Perform Paging**: Perform paging for a specific process.
-- **Perform LRU**: Simulate LRU page replacement.
+| Option | Description |
+|--------|-------------|
+| 1 | Process Management -- access scheduling, lifecycle, and communication operations |
+| 2 | Memory Management -- set page sizes, calculate pages, perform paging, simulate LRU |
+| 3 | Automatically Add Processes -- bulk-create processes with random attributes |
+| 4 | Exit |
 
-## Testing
-Unit tests are provided to verify the correctness of the major functionalities. The tests are written using Google Test.
+### Process Management Submenu
 
-### Running Tests
-1. **Build and run the tests**:
-    ```bash
-    make process_manager_test
-    ./process_manager_test
-    ```
-    This will run all the unit tests and display the results.
+Create processes manually or automatically, then apply scheduling algorithms (FCFS, Priority, SJF, Round-Robin, Multilevel Queue). Manage process states by suspending, blocking, resuming, or dispatching individual processes. View the ready, running, and blocked queues after each operation.
+
+### Memory Management Submenu
+
+Set page sizes for individual processes, calculate the number of pages and frames required for a given memory allocation, perform paging simulations, and run LRU page replacement with custom frame counts and page reference strings.
+
+---
+
+## Project Structure
+
+```
+Eagle-Kernel-Simulator/
+|-- Eagle_OS.cpp       # Complete simulator source (ProcessManager class, scheduling, memory management, main loop)
+|-- .gitignore         # Git ignore rules
+|-- LICENSE            # BSD 3-Clause License
+|-- README.md          # Project documentation
+```
+
+---
 
 ## Contributing
-Contributions are welcome! If you'd like to contribute, please follow these steps:
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes and commit them (`git commit -am 'Add new feature'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Create a new Pull Request.
+
+Contributions are welcome. Please fork this repository, create a feature branch, and submit a pull request for review.
+
+---
 
 ## License
-This project is licensed under the BSD 3-Clause License. 
-This code is protected under an "All Rights Reserved" license. You must obtain explicit permission from the copyright holder before using, distributing, or modifying this work.
 
+This project is licensed under the **BSD 3-Clause License**. See the [LICENSE](LICENSE) file for details.
+
+---
 
 ## Contact
-For any queries or suggestions, feel free to reach out:
+
 - **Email:** sa.abdullahshah.2001@gmail.com
-- **LinkedIn:** [Syed Abdullah Shah](https://www.linkedin.com/in/syed-abdullah-shah-4018a5176) 
+- **LinkedIn:** [Syed Abdullah Shah](https://www.linkedin.com/in/syed-abdullah-shah-4018a5176)
